@@ -1,10 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Outfit:wght@400..700&family=Fredoka:wght@400..700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", sans-serif;
   --font-cute: "Fredoka", sans-serif;
+
+  /* Lightened weights (~10% thinner across the board) */
+  --font-weight-medium: 420;
+  --font-weight-semibold: 525;
+  --font-weight-bold: 630;
+  --font-weight-black: 735;
 
   /* More vibrant, "pop" pastels */
   --color-diagnosis: #bae6fd;

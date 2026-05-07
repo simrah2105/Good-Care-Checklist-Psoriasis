@@ -62,12 +62,12 @@ export default function App() {
 
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/60 backdrop-blur-xl">
-        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3 group cursor-pointer" onClick={() => setSelectedProtocol(null)}>
-            <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center p-1 shadow-sm group-hover:rotate-3 transition-transform overflow-hidden">
-              <img 
-                src="https://arthritispatient.ca/wp-content/uploads/2018/04/logo.png" 
-                alt="CAPA Logo" 
+        <div className="container mx-auto px-4 h-24 flex items-center justify-between">
+          <div className="flex items-center gap-4 group cursor-pointer" onClick={() => setSelectedProtocol(null)}>
+            <div className="w-20 h-20 rounded-2xl bg-white border border-slate-100 flex items-center justify-center p-1.5 shadow-sm group-hover:rotate-3 transition-transform overflow-hidden">
+              <img
+                src="https://arthritispatient.ca/wp-content/uploads/2018/04/logo.png"
+                alt="CAPA Logo"
                 className="w-full h-auto object-contain"
                 referrerPolicy="no-referrer"
               />
@@ -78,12 +78,6 @@ export default function App() {
           </div>
           
           <div className="flex items-center gap-4">
-            {/* Equity Tag */}
-            <div className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-50 border-2 border-amber-100 text-amber-700 shadow-sm">
-              <Globe size={16} />
-              <span className="text-xs font-bold font-cute">Equity & Accessibility First</span>
-            </div>
-
             {!selectedProtocol && (
               <div className="hidden md:flex bg-slate-100/50 p-1 rounded-2xl border border-slate-200/30 backdrop-blur-sm">
                 <button 
@@ -127,7 +121,7 @@ export default function App() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 15 }}
                 >
-                  <h2 className="text-5xl md:text-7xl font-semibold tracking-tight text-slate-900 leading-[0.95] font-cute">
+                  <h2 className="text-5xl md:text-7xl font-[580] tracking-tight text-slate-900 leading-[0.95] font-cute">
                     Your Path to <br />
                     <span className="relative inline-block mt-2">
                       <span className="relative z-10 text-indigo-600">Better Care</span>
@@ -152,7 +146,7 @@ export default function App() {
                       <p className="text-2xl font-bold text-slate-600 uppercase tracking-[0.3em]">I am a...</p>
                       <div className="h-px w-12 bg-slate-300" />
                     </div>
-                    <div className="flex flex-wrap justify-center gap-4">
+                    <div className="flex flex-wrap justify-center gap-8 md:gap-10 px-4 py-4">
                       {personas.map((p, idx) => {
                         const Icon = p.icon;
                         return (
@@ -190,7 +184,7 @@ export default function App() {
               {/* View Modes */}
               <div className="relative">
                 {viewMode === 'grid' ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
                     {protocols.map((protocol, index) => {
                       const isHighlighted =
                         (persona === 'newly' && ['diagnosis', 'treatment'].includes(protocol.id)) ||
@@ -223,7 +217,7 @@ export default function App() {
 
               {/* Clinical Domains Section */}
               {viewMode === 'grid' && (
-                <section className="max-w-6xl mx-auto space-y-12">
+                <section className="space-y-12">
                   <div className="text-center space-y-4">
                     <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-slate-100 text-slate-500 text-xs font-bold uppercase tracking-[0.3em] mb-2">
                       <Activity size={12} /> Clinical Context
@@ -238,8 +232,11 @@ export default function App() {
                       return (
                         <motion.div
                           key={domain.name}
-                          whileHover={{ y: -6 }}
-                          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                          viewport={{ once: true, margin: '-50px' }}
+                          transition={{ delay: idx * 0.06, type: 'spring', stiffness: 120, damping: 18 }}
+                          whileHover={{ y: -8, scale: 1.02 }}
                           className="group relative bg-white border-2 border-slate-50 hover:border-indigo-100 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col cute-shadow"
                         >
                           <a
@@ -252,20 +249,24 @@ export default function App() {
                               0{idx + 1}
                             </div>
 
-                            <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors duration-300 shadow-inner">
-                              <DomainIcon size={28} />
-                            </div>
+                            <motion.div
+                              whileHover={{ rotate: [0, -10, 10, -6, 6, 0] }}
+                              transition={{ duration: 0.6 }}
+                              className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors duration-300 shadow-inner"
+                            >
+                              <DomainIcon size={30} />
+                            </motion.div>
 
                             <div className="space-y-1.5">
-                              <h4 className="text-lg font-bold text-slate-800 leading-tight font-cute">{domain.name}</h4>
+                              <h4 className="text-xl font-bold text-slate-800 leading-tight font-cute">{domain.name}</h4>
                               <p className="text-sm text-slate-600 font-medium leading-relaxed">
                                 {domain.desc}
                               </p>
                             </div>
 
-                            <div className="flex items-center gap-1.5 text-indigo-600 font-bold text-xs uppercase tracking-widest pt-1">
+                            <div className="flex items-center gap-1.5 text-indigo-600 font-bold text-sm pt-1">
                               <span>{domain.resourceTitle}</span>
-                              <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" />
+                              <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                             </div>
                           </a>
 
@@ -274,10 +275,10 @@ export default function App() {
                               href={domain.secondaryUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="border-t border-slate-100 px-4 py-3 bg-slate-50/50 hover:bg-white text-xs font-semibold text-slate-500 hover:text-indigo-600 transition-colors flex items-center justify-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                              className="border-t border-slate-100 px-4 py-3 bg-slate-50/50 hover:bg-white text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors flex items-center justify-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                             >
                               <span className="truncate">{domain.secondaryTitle}</span>
-                              <ArrowRight size={10} className="shrink-0" />
+                              <ArrowRight size={12} className="shrink-0" />
                             </a>
                           )}
                         </motion.div>
@@ -344,16 +345,32 @@ interface ProtocolCardProps {
 function ProtocolCard({ protocol, index, isHighlighted, isDimmed, onClick }: ProtocolCardProps) {
   const Icon = protocol.icon;
 
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    rest: {
+      opacity: isDimmed ? 0.4 : 1,
+      y: 0,
+      scale: isHighlighted ? 1.04 : 1,
+    },
+    hover: {
+      y: -8,
+      scale: isHighlighted ? 1.05 : 1.02,
+      opacity: 1,
+    },
+  };
+
+  const iconVariants = {
+    rest: { rotate: 0, scale: 1 },
+    hover: { rotate: [0, -8, 8, -4, 4, 0], scale: 1.08 },
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{
-        opacity: isDimmed ? 0.4 : 1,
-        y: 0,
-        scale: isHighlighted ? 1.04 : 1,
-      }}
+      variants={cardVariants}
+      initial="initial"
+      animate="rest"
+      whileHover="hover"
       transition={{ delay: index * 0.05 }}
-      whileHover={{ y: -8, scale: isHighlighted ? 1.05 : 1.02, opacity: 1 }}
       onClick={onClick}
       className={cn(
         "group cursor-pointer transition-all duration-500",
@@ -361,23 +378,27 @@ function ProtocolCard({ protocol, index, isHighlighted, isDimmed, onClick }: Pro
         isDimmed ? "grayscale" : ""
       )}
     >
-      <Card className="h-full border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden bg-white rounded-[3rem] cute-shadow cute-shadow-hover">
+      <Card className="h-full border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden bg-white rounded-[3rem] cute-shadow cute-shadow-hover flex flex-col">
         <div className={cn("h-4 w-full", protocol.color)} />
         <CardHeader className="p-10 pb-4 relative">
           <div className="absolute top-8 right-10 text-5xl font-bold font-cute text-slate-100 group-hover:text-indigo-100 transition-colors leading-none select-none" aria-hidden="true">
             0{index + 1}
           </div>
-          <div className={cn(
-            "w-20 h-20 rounded-[2rem] flex items-center justify-center mb-8 transition-transform duration-300 group-hover:scale-105 shadow-xl shadow-indigo-100/30",
-            protocol.color,
-            protocol.textColor
-          )}>
+          <motion.div
+            variants={iconVariants}
+            transition={{ duration: 0.6 }}
+            className={cn(
+              "w-20 h-20 rounded-[2rem] flex items-center justify-center mb-8 shadow-xl shadow-indigo-100/30",
+              protocol.color,
+              protocol.textColor
+            )}
+          >
             <Icon size={40} />
-          </div>
+          </motion.div>
           <CardTitle className="text-3xl font-bold tracking-tight text-slate-800 group-hover:text-indigo-600 transition-colors font-cute">{protocol.title}</CardTitle>
           <CardDescription className="text-slate-600 text-lg leading-relaxed font-medium mt-4 line-clamp-3">{protocol.shortDesc}</CardDescription>
         </CardHeader>
-        <CardContent className="p-10 pt-0 flex items-center justify-between mt-6">
+        <CardContent className="p-10 pt-0 flex items-center justify-between mt-6 flex-1">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-indigo-500" />
             <span className="text-xs font-bold text-slate-400 group-hover:text-indigo-500 transition-colors uppercase tracking-[0.2em]">Explore Guide</span>
@@ -643,21 +664,98 @@ function ProtocolDetail({ protocol, onBack, onNext }: { protocol: Protocol, onBa
         ))}
       </div>
 
+      {/* Equity & Accessibility section */}
+      {protocol.equityResources && protocol.equityResources.length > 0 && (
+        <motion.div
+          id="equity-resources"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ type: 'spring', stiffness: 80, damping: 18 }}
+          className="relative rounded-[2.5rem] border-2 border-amber-200 bg-gradient-to-br from-amber-50 via-white to-amber-50/40 shadow-lg shadow-amber-100/40 overflow-hidden"
+        >
+          <motion.div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-100/40 to-transparent pointer-events-none"
+            animate={{ x: ['-100%', '200%'] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2 }}
+          />
+          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-400 via-amber-300 to-amber-100" aria-hidden="true" />
+          <div className="p-8 md:p-12 pl-10 md:pl-14 space-y-8 relative">
+            <div className="flex items-start gap-5">
+              <motion.div
+                className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-700 shadow-sm shrink-0"
+                animate={{ rotate: [0, -8, 8, -4, 4, 0] }}
+                transition={{ duration: 4, repeat: Infinity, repeatDelay: 3, ease: 'easeInOut' }}
+              >
+                <Globe size={26} />
+              </motion.div>
+              <div className="space-y-2 flex-1">
+                <div className="text-xs font-bold text-amber-700 uppercase tracking-[0.2em]">Equity & Accessibility</div>
+                <h3 className="text-3xl md:text-4xl font-bold text-slate-800 font-cute leading-tight">Resources for everyone</h3>
+                <p className="text-slate-600 leading-relaxed text-base md:text-lg max-w-2xl">
+                  Plain language, cultural sensitivity, and tools for navigating coverage barriers — tailored to this stage of your journey.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {protocol.equityResources.map((resource, rIdx) => (
+                <motion.a
+                  key={rIdx}
+                  href={resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: rIdx * 0.1, type: 'spring', stiffness: 120, damping: 18 }}
+                  whileHover={{ y: -3 }}
+                  className="group/eq flex items-start gap-4 p-5 rounded-2xl bg-white border-2 border-amber-100 hover:border-amber-300 hover:shadow-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 shrink-0 group-hover/eq:bg-amber-100 transition-colors">
+                    <BookOpen size={18} strokeWidth={2.25} />
+                  </div>
+                  <div className="flex-1 min-w-0 space-y-1">
+                    <div className="font-bold text-slate-800 leading-snug group-hover/eq:text-amber-700 transition-colors">{resource.title}</div>
+                    <p className="text-sm text-slate-600 leading-relaxed">{resource.description}</p>
+                  </div>
+                  <ArrowRight size={16} className="text-amber-400 group-hover/eq:text-amber-600 group-hover/eq:translate-x-0.5 transition-all mt-1 shrink-0" />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       <div className="flex justify-center pt-8 border-t border-slate-100 pb-12">
         {onNext ? (
-          <button 
+          <motion.button
             onClick={onNext}
-            className="flex items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-700 text-white px-12 py-8 font-bold shadow-xl shadow-indigo-200 hover:-translate-y-1 transition-all text-lg w-full md:w-auto"
+            whileHover={{ y: -4, scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 280, damping: 18 }}
+            className="flex items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-700 text-white px-12 py-8 font-bold shadow-xl shadow-indigo-200 transition-colors text-lg w-full md:w-auto"
           >
-            Continue Journey <ArrowRight size={20} className="ml-2" />
-          </button>
+            Continue Journey
+            <motion.span
+              animate={{ x: [0, 6, 0] }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+              className="ml-2 inline-flex"
+            >
+              <ArrowRight size={20} />
+            </motion.span>
+          </motion.button>
         ) : (
-          <button 
+          <motion.button
             onClick={onBack}
-            className="flex items-center justify-center rounded-full bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 px-12 py-8 font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all text-lg w-full md:w-auto"
+            whileHover={{ y: -4, scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 280, damping: 18 }}
+            className="flex items-center justify-center rounded-full bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 px-12 py-8 font-bold shadow-lg hover:shadow-xl transition-shadow text-lg w-full md:w-auto"
           >
             Review Complete <CheckCircle2 size={20} className="ml-2 text-indigo-600" />
-          </button>
+          </motion.button>
         )}
       </div>
     </motion.div>
@@ -805,19 +903,32 @@ function MilestoneDetail({ protocol, onBack, onNext }: { protocol: Protocol, onB
 
       <div className="flex justify-center pt-8">
         {onNext ? (
-          <button 
+          <motion.button
             onClick={onNext}
-            className="flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 px-10 py-6 font-bold transition-all text-lg w-full md:w-auto"
+            whileHover={{ y: -4, scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 280, damping: 18 }}
+            className="flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 px-10 py-6 font-bold transition-colors text-lg w-full md:w-auto"
           >
-            Succeeding Milestone <ArrowRight size={20} className="ml-2 text-slate-400" />
-          </button>
+            Succeeding Milestone
+            <motion.span
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              className="ml-2 inline-flex text-slate-400"
+            >
+              <ArrowRight size={20} />
+            </motion.span>
+          </motion.button>
         ) : (
-          <button 
+          <motion.button
             onClick={onBack}
-            className="flex items-center justify-center rounded-full bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 px-10 py-6 font-bold shadow-lg hover:shadow-xl transition-all text-lg w-full md:w-auto"
+            whileHover={{ y: -4, scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 280, damping: 18 }}
+            className="flex items-center justify-center rounded-full bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 px-10 py-6 font-bold shadow-lg hover:shadow-xl transition-shadow text-lg w-full md:w-auto"
           >
             Review Complete <CheckCircle2 size={20} className="ml-2 text-indigo-600" />
-          </button>
+          </motion.button>
         )}
       </div>
     </motion.div>

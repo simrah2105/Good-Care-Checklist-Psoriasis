@@ -62,6 +62,11 @@ export interface Protocol {
     title: string;
     url: string;
   }[];
+  equityResources?: {
+    title: string;
+    url: string;
+    description: string;
+  }[];
 }
 
 export const clinicalDomains: ClinicalDomain[] = [
@@ -203,6 +208,10 @@ export const protocols: Protocol[] = [
       { id: 'R-033', title: 'Difference Between Psoriasis and PsA', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/difference-between-psa-and-ra/' },
       { id: 'R-003', title: 'Understanding Psoriasis Severity', url: 'https://psoriasiscanada.ca/about-psoriasis/severity/' },
       { id: 'R-004', title: 'Learn About the PASI Score', url: 'https://psoriasiscanada.ca/about-psoriasis/pasi-score/' }
+    ],
+    equityResources: [
+      { title: 'Plain Language Symptom Guide', url: '#', description: 'Jargon-free overview of early PsA symptoms, written at a grade 6 reading level.' },
+      { title: 'Find a Specialist Near You', url: '#', description: 'Locate rheumatologists and dermatologists, including those offering interpreter services.' }
     ]
   },
   {
@@ -274,6 +283,10 @@ export const protocols: Protocol[] = [
       { id: 'R-039', title: 'Comorbidities of Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/' },
       { id: 'R-087', title: 'Children and Youth With Psoriasis', url: 'https://psoriasiscanada.ca/about-psoriasis/pediatirc-psoriasis/' },
       { id: 'R-126', title: 'Pregnancy and Parenting with Arthritis', url: 'https://arthritispatient.ca/en/pregnancy-and-parenting-with-arthritis-a-resource-for-patients-by-patients/' }
+    ],
+    equityResources: [
+      { title: 'Care Across Life Stages', url: '#', description: 'Resources tailored for children, parents, and older adults navigating psoriatic disease.' },
+      { title: 'Cultural Sensitivity in Care', url: '#', description: 'Guidance on how psoriatic disease may present and be managed across different communities.' }
     ]
   },
   {
@@ -345,6 +358,10 @@ export const protocols: Protocol[] = [
       { id: 'R-049', title: 'Treating Psoriasis: Systemic Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/traditional-systemics/' },
       { id: 'R-051', title: 'Treating Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/' },
       { id: 'R-052', title: 'PsA Oral Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/biologics-and-biosimilars/' }
+    ],
+    equityResources: [
+      { title: 'Public Drug Plans by Province', url: 'https://arthritispatient.ca/en/public-drug-plan-information-by-province/', description: 'Coverage rules and access pathways for medications in each Canadian province.' },
+      { title: 'Patient Assistance Programs', url: '#', description: 'Manufacturer-sponsored programs that reduce out-of-pocket biologic costs.' }
     ]
   },
   {
@@ -416,6 +433,10 @@ export const protocols: Protocol[] = [
       { id: 'R-096', title: 'Setting Treatment Goals', url: 'https://psoriasiscanada.ca/treatment-decisions-overview/setting-your-goals/' },
       { id: 'R-055', title: 'Medication Access Guide', url: 'https://psoriasiscanada.ca/medication-access-overview/' },
       { id: 'R-163', title: 'Public Drug Plans by Province', url: 'https://arthritispatient.ca/en/public-drug-plan-information-by-province/' }
+    ],
+    equityResources: [
+      { title: 'Patient Advocacy Toolkit', url: '#', description: 'Templates and scripts for advocating with providers, insurers, and HR teams.' },
+      { title: 'Insurance Appeals Guide', url: '#', description: 'Step-by-step walkthrough for appealing denied coverage, including sample letters.' }
     ]
   },
   {
@@ -487,6 +508,10 @@ export const protocols: Protocol[] = [
       { id: 'R-002', title: 'Common Psoriasis Triggers', url: 'https://psoriasiscanada.ca/about-psoriasis/risk-factors-and-triggers/' },
       { id: 'R-135', title: 'Managing Pain and Fatigue', url: 'https://arthritispatient.ca/en/managing-pain-and-fatigue/' },
       { id: 'R-139', title: 'The Role of an Occupational Therapist', url: 'https://arthritispatient.ca/en/the-role-of-an-occupational-therapist-ot-to-support-people-living-with-arthritis/' }
+    ],
+    equityResources: [
+      { title: 'Workplace Accommodations Guide', url: '#', description: 'Knowing your rights and asking for ergonomic, scheduling, and remote-work supports.' },
+      { title: 'Disability Tax Credit Info', url: '#', description: 'Eligibility, application help, and what to do if your initial claim is rejected.' }
     ]
   },
   {
@@ -558,6 +583,10 @@ export const protocols: Protocol[] = [
       { id: 'R-024', title: 'Psoriasis and Relationships', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/psoriasis-and-relationships/' },
       { id: 'R-041', title: 'Working with Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/' },
       { id: 'R-123', title: 'Youth and Young Adults with Rheumatic Disease', url: 'https://arthritispatient.ca/en/youth-and-young-adults-with-rheumatic-disease/' }
+    ],
+    equityResources: [
+      { title: 'Free & Sliding-Scale Mental Health Support', url: '#', description: 'Counselling and therapy options that don\'t require private insurance.' },
+      { title: 'Peer Communities for Chronic Illness', url: '#', description: 'Online and in-person groups, including identity-specific spaces (BIPOC, LGBTQ+, youth).' }
     ]
   }
 ];
