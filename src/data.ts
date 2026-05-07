@@ -19,7 +19,7 @@ export interface ProtocolSection {
   description: string;
   patientTip: string;
   checkpoints: string[];
-  integratedLink?: { title: string; url: string; };
+  integratedLinks?: { title: string; url: string; }[];
 }
 
 export interface Milestone {
@@ -41,6 +41,8 @@ export interface ClinicalDomain {
   icon: any;
   resourceTitle: string;
   resourceUrl: string;
+  secondaryTitle?: string;
+  secondaryUrl?: string;
 }
 
 export interface Protocol {
@@ -67,57 +69,67 @@ export const clinicalDomains: ClinicalDomain[] = [
     name: 'Peripheral Arthritis',
     desc: 'Joints in arms/legs',
     icon: Move,
-    resourceTitle: 'What is PsA?',
-    resourceUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/'
+    resourceTitle: 'PsA Symptoms',
+    resourceUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/',
+    secondaryTitle: 'Psoriasis vs PsA',
+    secondaryUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/difference-between-psa-and-ra/'
   },
   {
     name: 'Axial Disease',
     desc: 'Spine and sacroiliac joints',
     icon: AlignCenter,
-    resourceTitle: 'Types of PsA',
-    resourceUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/types-of-psa/'
+    resourceTitle: 'PsA Symptoms',
+    resourceUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/',
+    secondaryTitle: 'Psoriasis vs PsA',
+    secondaryUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/difference-between-psa-and-ra/'
   },
   {
     name: 'Enthesitis',
     desc: 'Tendon & ligament inflammation',
     icon: Anchor,
-    resourceTitle: 'PsA Symptoms & Diagnosis',
+    resourceTitle: 'PsA Symptoms',
     resourceUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/'
   },
   {
     name: 'Dactylitis',
     desc: 'Sausage-like digit swelling',
     icon: Hand,
-    resourceTitle: 'PsA Symptoms & Diagnosis',
+    resourceTitle: 'PsA Symptoms',
     resourceUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/'
   },
   {
     name: 'Skin Psoriasis',
     desc: 'Plaques and itch',
     icon: Layers,
-    resourceTitle: 'Psoriasis Symptoms',
-    resourceUrl: 'https://psoriasiscanada.ca/about-psoriasis/symptoms-of-psoriasis/'
+    resourceTitle: 'Psoriasis Severity',
+    resourceUrl: 'https://psoriasiscanada.ca/about-psoriasis/severity/',
+    secondaryTitle: 'Common Triggers',
+    secondaryUrl: 'https://psoriasiscanada.ca/about-psoriasis/risk-factors-and-triggers/'
   },
   {
     name: 'Nail Disease',
     desc: 'Pitting and nail separation',
     icon: Fingerprint,
-    resourceTitle: 'Types of Psoriasis',
-    resourceUrl: 'https://psoriasiscanada.ca/about-psoriasis/types-of-psoriasis/'
+    resourceTitle: 'PsA Symptoms',
+    resourceUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/'
   },
   {
     name: 'Cardiovascular Health',
     desc: 'Heart and circulation',
     icon: HeartPulse,
-    resourceTitle: 'CVD & Arthritis (CAPA)',
-    resourceUrl: 'https://arthritispatient.ca/en/cardiovascular-health-arthritis/'
+    resourceTitle: 'Associated Conditions',
+    resourceUrl: 'https://psoriasiscanada.ca/associated-conditions-overview/',
+    secondaryTitle: 'PsA Comorbidities',
+    secondaryUrl: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/'
   },
   {
     name: 'Mental Health',
     desc: 'Anxiety and depression',
     icon: Brain,
-    resourceTitle: 'Mental Health & Psoriasis',
-    resourceUrl: 'https://psoriasiscanada.ca/associated-conditions-overview/'
+    resourceTitle: 'Psoriasis & Emotions',
+    resourceUrl: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/',
+    secondaryTitle: 'Psoriasis & Relationships',
+    secondaryUrl: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/psoriasis-and-relationships/'
   }
 ];
 
@@ -152,7 +164,7 @@ export const protocols: Protocol[] = [
           "Nail pitting or separation"
         ]
       },
-      journeyAids: [{ title: 'Symptom Tracking Diary', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/', description: 'Downloadable worksheet to log daily symptoms before your next visit.', type: 'worksheet' }, { title: 'Joint Pain Checklist', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/', description: 'A quick 1-page guide on what symptoms point to early PsA.', type: 'tool' }]
+      journeyAids: [{ title: 'Symptom Tracking Diary', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/', description: 'Downloadable worksheet to log daily symptoms before your next visit.', type: 'worksheet' }, { title: 'PsA Symptom Guide', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/', description: 'Plain-language overview of the symptoms that point to early PsA.', type: 'tool' }]
     },
     whyItMatters: 'Translating vague discomfort into specific terms helps your doctor reach an accurate diagnosis much faster.',
     relatedDomainIds: ['Skin Psoriasis', 'Nail Disease', 'Peripheral Arthritis'],
@@ -166,7 +178,10 @@ export const protocols: Protocol[] = [
           'Check your fingernails and toenails for small dents or separating from the nail bed',
           'Note any deep, aching pain in your lower back or buttocks'
         ],
-        integratedLink: { title: 'Symptoms & Diagnosis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/' }
+        integratedLinks: [
+          { title: 'Symptoms of Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/' },
+          { title: 'Difference Between Psoriasis and PsA', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/difference-between-psa-and-ra/' }
+        ]
       },
       {
         title: 'Measuring Skin Impact',
@@ -177,13 +192,17 @@ export const protocols: Protocol[] = [
           'Reflect on how your skin symptoms limit your daily activities or clothing choices',
           'Ask your doctor about your PASI score, a standard measurement they use'
         ],
-        integratedLink: { title: 'Learn About the PASI Score', url: 'https://psoriasiscanada.ca/about-psoriasis/pasi-score/' }
+        integratedLinks: [
+          { title: 'Understanding Psoriasis Severity', url: 'https://psoriasiscanada.ca/about-psoriasis/severity/' },
+          { title: 'Learn About the PASI Score', url: 'https://psoriasiscanada.ca/about-psoriasis/pasi-score/' }
+        ]
       }
     ],
     resources: [
+      { id: 'R-028', title: 'Symptoms of Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/' },
+      { id: 'R-033', title: 'Difference Between Psoriasis and PsA', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/difference-between-psa-and-ra/' },
       { id: 'R-003', title: 'Understanding Psoriasis Severity', url: 'https://psoriasiscanada.ca/about-psoriasis/severity/' },
-      { id: 'R-004', title: 'Learn About the PASI Score', url: 'https://psoriasiscanada.ca/about-psoriasis/pasi-score/' },
-      { id: 'R-031', title: 'Symptoms & Diagnosis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/symptoms-diagnosis/' }
+      { id: 'R-004', title: 'Learn About the PASI Score', url: 'https://psoriasiscanada.ca/about-psoriasis/pasi-score/' }
     ]
   },
   {
@@ -216,7 +235,7 @@ export const protocols: Protocol[] = [
           "Unexpected weight changes"
         ]
       },
-      journeyAids: [{ title: 'Metabolic Risk Assessment', url: 'https://psoriasiscanada.ca/associated-conditions-overview/', description: 'Self-assessment for related health conditions.', type: 'tool' }, { title: 'Heart Health Webinar', url: 'https://arthritispatient.ca', description: 'Video guide on maintaining cardiovascular health with psoriasis.', type: 'video' }]
+      journeyAids: [{ title: 'Conditions Associated With Psoriasis', url: 'https://psoriasiscanada.ca/associated-conditions-overview/', description: 'Overview of related health conditions to watch for.', type: 'tool' }, { title: 'PsA Comorbidities', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/', description: 'Guide on cardiovascular, metabolic, and inflammatory overlap.', type: 'video' }]
     },
     whyItMatters: 'Managing inflammation holistically can drastically lower your risk for other health conditions like heart disease or diabetes.',
     relatedDomainIds: ['Cardiovascular Health', 'Mental Health'],
@@ -230,7 +249,10 @@ export const protocols: Protocol[] = [
           'Talk to your doctor about your risk factors for heart disease',
           'Keep a diary tracking your energy crashes and fatigue levels'
         ],
-        integratedLink: { title: 'Associated Conditions', url: 'https://psoriasiscanada.ca/associated-conditions-overview/' }
+        integratedLinks: [
+          { title: 'Conditions Associated With Psoriasis', url: 'https://psoriasiscanada.ca/associated-conditions-overview/' },
+          { title: 'Comorbidities of Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/' }
+        ]
       },
       {
         title: 'Life Transitions',
@@ -241,13 +263,17 @@ export const protocols: Protocol[] = [
           'Talk to your care team if you are transitioning from pediatric to adult care',
           'Review how well your daily routine accommodates your mobility needs'
         ],
-        integratedLink: { title: 'Pregnancy and Parenting Guide', url: 'https://arthritispatient.ca/en/pregnancy-and-parenting-with-arthritis-a-resource-for-patients-by-patients/' }
+        integratedLinks: [
+          { title: 'Children and Youth With Psoriasis', url: 'https://psoriasiscanada.ca/about-psoriasis/pediatirc-psoriasis/' },
+          { title: 'Pregnancy and Parenting with Arthritis', url: 'https://arthritispatient.ca/en/pregnancy-and-parenting-with-arthritis-a-resource-for-patients-by-patients/' }
+        ]
       }
     ],
     resources: [
-      { id: 'R-086', title: 'Associated Conditions', url: 'https://psoriasiscanada.ca/associated-conditions-overview/' },
-      { id: 'R-087', title: 'Pediatric Psoriasis', url: 'https://psoriasiscanada.ca/about-psoriasis/pediatirc-psoriasis/' },
-      { id: 'R-126', title: 'Pregnancy and Parenting Guide', url: 'https://arthritispatient.ca/en/pregnancy-and-parenting-with-arthritis-a-resource-for-patients-by-patients/' }
+      { id: 'R-086', title: 'Conditions Associated With Psoriasis', url: 'https://psoriasiscanada.ca/associated-conditions-overview/' },
+      { id: 'R-039', title: 'Comorbidities of Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/' },
+      { id: 'R-087', title: 'Children and Youth With Psoriasis', url: 'https://psoriasiscanada.ca/about-psoriasis/pediatirc-psoriasis/' },
+      { id: 'R-126', title: 'Pregnancy and Parenting with Arthritis', url: 'https://arthritispatient.ca/en/pregnancy-and-parenting-with-arthritis-a-resource-for-patients-by-patients/' }
     ]
   },
   {
@@ -280,7 +306,7 @@ export const protocols: Protocol[] = [
           "Severe needle phobia (if injections are suggested)"
         ]
       },
-      journeyAids: [{ title: 'Medication Trade-off Guide', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/', description: 'Interactive tool comparing side effects vs benefits.', type: 'tool' }, { title: 'Biologics 101 Guide', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/biologics-and-biosimilars/', description: 'Everything you need to know about starting biologic therapy.', type: 'worksheet' }]
+      journeyAids: [{ title: 'Treating Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/', description: 'Overview of PsA treatment paths and trade-offs.', type: 'tool' }, { title: 'PsA Oral Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/biologics-and-biosimilars/', description: 'What to expect from oral systemic medications.', type: 'worksheet' }]
     },
     whyItMatters: 'Knowing what treatments are out there prevents you from giving up when a single medication stops working.',
     relatedDomainIds: ['Peripheral Arthritis', 'Axial Disease', 'Skin Psoriasis'],
@@ -294,24 +320,31 @@ export const protocols: Protocol[] = [
           'Ask your doctor if phototherapy (light therapy) is a viable option for you',
           'Discuss with your doctor if it\'s time to explore oral or biologic treatments'
         ],
-        integratedLink: { title: 'Using Topical Treatments', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/topicals/' }
+        integratedLinks: [
+          { title: 'Treating Psoriasis: Topical Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/topicals/' },
+          { title: 'Treating Psoriasis: Systemic Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/traditional-systemics/' }
+        ]
       },
       {
         title: 'Advanced Therapies for PsA',
         description: 'When joint pain is severe, biologics and targeted therapies can help stop joint damage in its tracks.',
         patientTip: 'Biologics can seem intimidating at first, but they are designed to specifically target the immune response causing the damage.',
         checkpoints: [
-          'Discuss your comfort level with injections versus taking daily pills',
+          'Discuss your comfort level with injections or taking daily pills',
           'Ask exactly what symptoms the suggested medication is supposed to improve',
           'Make sure you understand what routine blood tests you will need while on a new drug'
         ],
-        integratedLink: { title: 'Overview of Treatments', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/' }
+        integratedLinks: [
+          { title: 'Treating Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/' },
+          { title: 'PsA Oral Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/biologics-and-biosimilars/' }
+        ]
       }
     ],
     resources: [
-      { id: 'R-048', title: 'Using Topical Treatments', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/topicals/' },
-      { id: 'R-051', title: 'Overview of Treatments', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/' },
-      { id: 'R-052', title: 'Guide to Oral Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/traditional-systemics/' }
+      { id: 'R-048', title: 'Treating Psoriasis: Topical Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/topicals/' },
+      { id: 'R-049', title: 'Treating Psoriasis: Systemic Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/traditional-systemics/' },
+      { id: 'R-051', title: 'Treating Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/' },
+      { id: 'R-052', title: 'PsA Oral Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/biologics-and-biosimilars/' }
     ]
   },
   {
@@ -344,7 +377,7 @@ export const protocols: Protocol[] = [
           "Changes in your employment or insurance status"
         ]
       },
-      journeyAids: [{ title: 'Appointment Prep Checklist', url: 'https://arthritispatient.ca/en/how-to-make-the-most-out-of-your-appointment/', description: 'A 1-page guide on top questions to ask your doctor.', type: 'worksheet' }, { title: 'Navigating Insurance Approvals', url: 'https://psoriasiscanada.ca/medication-access-overview/', description: 'Step-by-step guide on securing drug coverage.', type: 'tool' }]
+      journeyAids: [{ title: 'Appointment Prep Checklist', url: 'https://arthritispatient.ca/en/how-to-make-the-most-out-of-your-appointment/', description: 'A 1-page guide on top questions to ask your doctor.', type: 'worksheet' }, { title: 'Medication Access Guide', url: 'https://psoriasiscanada.ca/medication-access-overview/', description: 'Step-by-step guide on securing drug coverage.', type: 'tool' }]
     },
     whyItMatters: 'Coming prepared with your top concerns ensures that your most meaningful questions don\'t get swallowed up by routine clinic check-ups.',
     relatedDomainIds: ['Mental Health'],
@@ -358,24 +391,31 @@ export const protocols: Protocol[] = [
           'Bring a printed or written log of your symptoms and recent flare-ups',
           'Never leave an appointment without knowing what the next steps are'
         ],
-        integratedLink: { title: 'How to Maximize Your Appointment Time', url: 'https://arthritispatient.ca/en/how-to-make-the-most-out-of-your-appointment/' }
+        integratedLinks: [
+          { title: 'Making the Most Out of Your Appointment', url: 'https://arthritispatient.ca/en/how-to-make-the-most-out-of-your-appointment/' },
+          { title: 'Setting Treatment Goals', url: 'https://psoriasiscanada.ca/treatment-decisions-overview/setting-your-goals/' }
+        ]
       },
       {
         title: 'Navigating Coverage Barriers',
         description: 'Advanced medications often require navigating insurance criteria or finding financial assistance to afford them.',
         patientTip: 'Many pharmaceutical companies offer Patient Support Programs (PSPs) which can guide you through insurance paperwork or help cover costs.',
         checkpoints: [
-          'Call your insurance provider to verify criteria for specific therapies',
-          'Ask your clinic if they can refer you to a Patient Support Program',
+          'Check whether the therapy is covered by your private or public insurance',
+          'You will be contacted by a Patient Support Program who can guide you on what insurance covers',
           'Keep copies of all your forms in case you need to appeal a coverage denial'
         ],
-        integratedLink: { title: 'Understanding Medication Access', url: 'https://psoriasiscanada.ca/medication-access-overview/' }
+        integratedLinks: [
+          { title: 'Medication Access Guide', url: 'https://psoriasiscanada.ca/medication-access-overview/' },
+          { title: 'Public Drug Plans by Province', url: 'https://arthritispatient.ca/en/public-drug-plan-information-by-province/' }
+        ]
       }
     ],
     resources: [
-      { id: 'R-110', title: 'How to Maximize Your Appointment Time', url: 'https://arthritispatient.ca/en/how-to-make-the-most-out-of-your-appointment/' },
-      { id: 'R-096', title: 'Setting Your Treatment Goals', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/' },
-      { id: 'R-055', title: 'Understanding Medication Access', url: 'https://psoriasiscanada.ca/medication-access-overview/' }
+      { id: 'R-110', title: 'Making the Most Out of Your Appointment', url: 'https://arthritispatient.ca/en/how-to-make-the-most-out-of-your-appointment/' },
+      { id: 'R-096', title: 'Setting Treatment Goals', url: 'https://psoriasiscanada.ca/treatment-decisions-overview/setting-your-goals/' },
+      { id: 'R-055', title: 'Medication Access Guide', url: 'https://psoriasiscanada.ca/medication-access-overview/' },
+      { id: 'R-163', title: 'Public Drug Plans by Province', url: 'https://arthritispatient.ca/en/public-drug-plan-information-by-province/' }
     ]
   },
   {
@@ -408,7 +448,7 @@ export const protocols: Protocol[] = [
           "Inability to perform daily activities due to pain or stiffness"
         ]
       },
-      journeyAids: [{ title: 'Flare Action Plan Template', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/', description: 'Template to fill out with your doctor on what to do during a flare.', type: 'worksheet' }, { title: 'Workplace Accommodations Guide', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/', description: 'How to ask for ergonomic tools and flexible schedules.', type: 'worksheet' }]
+      journeyAids: [{ title: 'Flare Action Plan Template', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/', description: 'Template to fill out with your doctor on what to do during a flare.', type: 'worksheet' }, { title: 'Working with PsA', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/', description: 'How to ask for ergonomic tools and flexible schedules.', type: 'worksheet' }]
     },
     whyItMatters: 'Recognizing your own individual triggers helps you stay ahead of flares rather than constantly fighting them after they hit.',
     relatedDomainIds: ['Peripheral Arthritis', 'Nail Disease'],
@@ -422,7 +462,10 @@ export const protocols: Protocol[] = [
           'Take note of any unexplainable side effects you think your medication is causing',
           'Review your tracked symptoms a few days before your doctor\'s appointment'
         ],
-        integratedLink: { title: 'Tracking Tool: Know Your Numbers', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/' }
+        integratedLinks: [
+          { title: 'Know Your Numbers & Trends Tracker', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/' },
+          { title: 'Common Psoriasis Triggers', url: 'https://psoriasiscanada.ca/about-psoriasis/risk-factors-and-triggers/' }
+        ]
       },
       {
         title: 'Protecting Your Joints',
@@ -433,13 +476,17 @@ export const protocols: Protocol[] = [
           'Listen to your body and pace your energy; don\'t push through severe fatigue',
           'Try incorporating low-impact movement like swimming or stationary biking into your week'
         ],
-        integratedLink: { title: 'How Occupational Therapy Helps', url: 'https://arthritispatient.ca/en/how-occupational-therapy-helped-with-arthritis/' }
+        integratedLinks: [
+          { title: 'Managing Pain and Fatigue', url: 'https://arthritispatient.ca/en/managing-pain-and-fatigue/' },
+          { title: 'The Role of an Occupational Therapist', url: 'https://arthritispatient.ca/en/the-role-of-an-occupational-therapist-ot-to-support-people-living-with-arthritis/' }
+        ]
       }
     ],
     resources: [
-      { id: 'R-111', title: 'Tracking Tool: Know Your Numbers', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/' },
-      { id: 'R-135', title: 'Tips for Managing Pain and Fatigue', url: 'https://arthritispatient.ca/en/managing-pain-and-fatigue/' },
-      { id: 'R-139', title: 'How Occupational Therapy Helps', url: 'https://arthritispatient.ca/en/how-occupational-therapy-helped-with-arthritis/' }
+      { id: 'R-111', title: 'Know Your Numbers & Trends Tracker', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/' },
+      { id: 'R-002', title: 'Common Psoriasis Triggers', url: 'https://psoriasiscanada.ca/about-psoriasis/risk-factors-and-triggers/' },
+      { id: 'R-135', title: 'Managing Pain and Fatigue', url: 'https://arthritispatient.ca/en/managing-pain-and-fatigue/' },
+      { id: 'R-139', title: 'The Role of an Occupational Therapist', url: 'https://arthritispatient.ca/en/the-role-of-an-occupational-therapist-ot-to-support-people-living-with-arthritis/' }
     ]
   },
   {
@@ -486,7 +533,10 @@ export const protocols: Protocol[] = [
           'Seek out an online or local patient support group so you don\'t feel alone',
           'Practice how you want to talk about your condition with friends or family'
         ],
-        integratedLink: { title: 'Living with Psoriatic Disease', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/psoriasis-and-relationships/' }
+        integratedLinks: [
+          { title: 'Psoriasis and Your Emotions', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/' },
+          { title: 'Psoriasis and Relationships', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/psoriasis-and-relationships/' }
+        ]
       },
       {
         title: 'Thriving at Work and School',
@@ -497,13 +547,17 @@ export const protocols: Protocol[] = [
           'If you are a student, connect with your school\'s accessibility services office',
           'Make dedicated time for hobbies and passions that remind you of who you are beyond the disease'
         ],
-        integratedLink: { title: 'Strategies for Working with PsA', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/' }
+        integratedLinks: [
+          { title: 'Working with Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/' },
+          { title: 'Youth and Young Adults with Rheumatic Disease', url: 'https://arthritispatient.ca/en/youth-and-young-adults-with-rheumatic-disease/' }
+        ]
       }
     ],
     resources: [
-      { id: 'R-016', title: 'Living with Psoriatic Disease', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/psoriasis-and-relationships/' },
+      { id: 'R-016', title: 'Psoriasis and Your Emotions', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/' },
       { id: 'R-024', title: 'Psoriasis and Relationships', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/psoriasis-and-relationships/' },
-      { id: 'R-041', title: 'Strategies for Working with PsA', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/' }
+      { id: 'R-041', title: 'Working with Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/' },
+      { id: 'R-123', title: 'Youth and Young Adults with Rheumatic Disease', url: 'https://arthritispatient.ca/en/youth-and-young-adults-with-rheumatic-disease/' }
     ]
   }
 ];

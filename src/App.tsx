@@ -5,11 +5,11 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  ChevronRight, 
-  ArrowLeft, 
-  Info, 
-  CheckCircle2, 
+import {
+  ChevronRight,
+  ArrowLeft,
+  Info,
+  CheckCircle2,
   Sparkles,
   ArrowRight,
   LayoutGrid,
@@ -20,7 +20,9 @@ import {
   Globe,
   Star,
   Zap,
-  Users
+  Users,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import { protocols, Protocol, clinicalDomains } from './data';
 import { cn } from '@/lib/utils';
@@ -77,8 +79,8 @@ export default function App() {
           
           <div className="flex items-center gap-4">
             {/* Equity Tag */}
-            <div className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-50 border-2 border-amber-100 text-amber-700 shadow-sm animate-bounce-subtle">
-              <Globe size={16} className="animate-spin-slow" />
+            <div className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-50 border-2 border-amber-100 text-amber-700 shadow-sm">
+              <Globe size={16} />
               <span className="text-xs font-bold font-cute">Equity & Accessibility First</span>
             </div>
 
@@ -125,7 +127,7 @@ export default function App() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 15 }}
                 >
-                  <h2 className="text-6xl md:text-8xl font-bold tracking-tight text-slate-900 leading-[0.95] font-cute">
+                  <h2 className="text-5xl md:text-7xl font-semibold tracking-tight text-slate-900 leading-[0.95] font-cute">
                     Your Path to <br />
                     <span className="relative inline-block mt-2">
                       <span className="relative z-10 text-indigo-600">Better Care</span>
@@ -139,16 +141,16 @@ export default function App() {
                   </h2>
                 </motion.div>
                 <p className="text-2xl text-slate-500 leading-relaxed max-w-2xl mx-auto font-medium font-cute">
-                  A streamlined guide built to help you navigate the complexities of psoriatic disease with confidence and clarity.
+                  A streamlined guide built to help you navigate the complexities of psoriatic arthritis with confidence and clarity.
                 </p>
 
                 {/* Persona Selector - Only visible on Guide view */}
                 {viewMode === 'grid' && (
                   <div className="pt-12 space-y-6">
                     <div className="flex items-center justify-center gap-3">
-                      <div className="h-px w-12 bg-slate-200" />
-                      <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.3em]">I am a...</p>
-                      <div className="h-px w-12 bg-slate-200" />
+                      <div className="h-px w-12 bg-slate-300" />
+                      <p className="text-2xl font-bold text-slate-600 uppercase tracking-[0.3em]">I am a...</p>
+                      <div className="h-px w-12 bg-slate-300" />
                     </div>
                     <div className="flex flex-wrap justify-center gap-4">
                       {personas.map((p, idx) => {
@@ -162,12 +164,14 @@ export default function App() {
                             onClick={() => setPersona(persona === p.id ? null : p.id)}
                             className={cn(
                               "group flex items-center gap-3 px-8 py-4 rounded-[2rem] border-4 transition-all duration-500 font-bold text-lg relative overflow-hidden",
-                              persona === p.id 
-                                ? "bg-indigo-600 border-indigo-600 text-white shadow-2xl shadow-indigo-200 scale-105" 
-                                : "bg-white border-slate-100 text-slate-600 hover:border-indigo-200 hover:bg-indigo-50/30"
+                              persona === p.id
+                                ? "bg-indigo-600 border-white ring-[6px] ring-indigo-600 text-white shadow-2xl shadow-indigo-400/70 scale-110"
+                                : persona !== null
+                                  ? "bg-slate-50 border-slate-100 text-slate-400 opacity-50 grayscale hover:opacity-80"
+                                  : "bg-white border-slate-100 text-slate-600 hover:border-indigo-200 hover:bg-indigo-50/30"
                             )}
                           >
-                            <Icon size={22} className={cn("transition-transform group-hover:scale-125", persona === p.id ? "animate-bounce" : "")} />
+                            <Icon size={22} className="transition-transform group-hover:scale-110" />
                             {p.label}
                             {persona === p.id && (
                               <motion.div 
@@ -188,17 +192,19 @@ export default function App() {
                 {viewMode === 'grid' ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {protocols.map((protocol, index) => {
-                      const isHighlighted = 
+                      const isHighlighted =
                         (persona === 'newly' && ['diagnosis', 'treatment'].includes(protocol.id)) ||
                         (persona === 'longterm' && ['management', 'holistic'].includes(protocol.id)) ||
                         (persona === 'caregiver' && ['decision', 'psychosocial'].includes(protocol.id));
-                      
+                      const isDimmed = persona !== null && !isHighlighted;
+
                       return (
-                        <ProtocolCard 
-                          key={protocol.id} 
-                          protocol={protocol} 
+                        <ProtocolCard
+                          key={protocol.id}
+                          protocol={protocol}
                           index={index}
                           isHighlighted={isHighlighted}
+                          isDimmed={isDimmed}
                           onClick={() => {
                             setSelectedProtocol(protocol);
                             setDetailMode('protocol');
@@ -215,71 +221,66 @@ export default function App() {
                 )}
               </div>
 
-              {/* Equity & Accessibility Section */}
-              <section className="max-w-5xl mx-auto">
-                <div className="bg-white rounded-[3rem] p-8 md:p-12 border-2 border-slate-50 shadow-sm relative overflow-hidden group cute-shadow">
-                  <div className="flex flex-col md:flex-row gap-8 items-center relative z-10">
-                    <div className="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 shrink-0">
-                      <Globe size={32} />
-                    </div>
-                    <div className="space-y-4 text-center md:text-left">
-                      <h3 className="text-2xl font-bold text-slate-800 font-cute">Equity & Accessibility</h3>
-                      <p className="text-slate-600 font-medium leading-relaxed">
-                        We are committed to making good care accessible to everyone. This includes plain language, cultural sensitivity, and tools for navigating coverage barriers.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
               {/* Clinical Domains Section */}
               {viewMode === 'grid' && (
                 <section className="max-w-6xl mx-auto space-y-12">
                   <div className="text-center space-y-4">
-                    <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em] mb-2">
+                    <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-slate-100 text-slate-500 text-xs font-bold uppercase tracking-[0.3em] mb-2">
                       <Activity size={12} /> Clinical Context
                     </div>
                     <h3 className="text-4xl font-bold text-slate-800 tracking-tight font-cute">Clinical Manifestations</h3>
-                    <p className="text-slate-500 font-medium max-w-xl mx-auto text-lg">Psoriatic disease can present in many ways. Explore the different clinical domains below.</p>
+                    <p className="text-slate-600 font-medium max-w-xl mx-auto text-lg">Psoriatic disease can present in many ways. Explore the different clinical domains below.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {clinicalDomains.map((domain, idx) => {
                       const DomainIcon = domain.icon;
                       return (
-                        <motion.a 
-                          key={domain.name} 
-                          href={domain.resourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ y: -8 }}
-                          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                          className="group relative p-8 rounded-[2.5rem] bg-white border-2 border-slate-50 shadow-sm hover:border-indigo-100 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center space-y-4 cute-shadow"
+                        <motion.div
+                          key={domain.name}
+                          whileHover={{ y: -6 }}
+                          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                          className="group relative bg-white border-2 border-slate-50 hover:border-indigo-100 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col cute-shadow"
                         >
-                          {/* Number Badge */}
-                          <div className="absolute top-6 right-8 text-[10px] font-black text-slate-100 group-hover:text-indigo-100 transition-colors">
-                            0{idx + 1}
-                          </div>
+                          <a
+                            href={domain.resourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-7 flex flex-col items-center text-center gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-[2.5rem]"
+                          >
+                            <div className="absolute top-5 right-7 text-xs font-black text-slate-200 group-hover:text-indigo-200 transition-colors tracking-wider" aria-hidden="true">
+                              0{idx + 1}
+                            </div>
 
-                          {/* Icon Container */}
-                          <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-all duration-300 shadow-inner">
-                            <DomainIcon size={28} />
-                          </div>
+                            <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors duration-300 shadow-inner">
+                              <DomainIcon size={28} />
+                            </div>
 
-                          {/* Content */}
-                          <div className="space-y-2">
-                            <h4 className="text-lg font-bold text-slate-800 leading-tight font-cute">{domain.name}</h4>
-                            <p className="text-xs text-slate-400 font-medium leading-relaxed line-clamp-2 group-hover:line-clamp-none transition-all">
-                              {domain.desc}
-                            </p>
-                          </div>
+                            <div className="space-y-1.5">
+                              <h4 className="text-lg font-bold text-slate-800 leading-tight font-cute">{domain.name}</h4>
+                              <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                                {domain.desc}
+                              </p>
+                            </div>
 
-                          {/* Action Hint */}
-                          <div className="pt-2 flex items-center gap-2 text-indigo-500 font-bold text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span>View Resource</span>
-                            <ArrowRight size={12} />
-                          </div>
-                        </motion.a>
+                            <div className="flex items-center gap-1.5 text-indigo-600 font-bold text-xs uppercase tracking-widest pt-1">
+                              <span>{domain.resourceTitle}</span>
+                              <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" />
+                            </div>
+                          </a>
+
+                          {domain.secondaryUrl && domain.secondaryTitle && (
+                            <a
+                              href={domain.secondaryUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="border-t border-slate-100 px-4 py-3 bg-slate-50/50 hover:bg-white text-xs font-semibold text-slate-500 hover:text-indigo-600 transition-colors flex items-center justify-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                            >
+                              <span className="truncate">{domain.secondaryTitle}</span>
+                              <ArrowRight size={10} className="shrink-0" />
+                            </a>
+                          )}
+                        </motion.div>
                       );
                     })}
                   </div>
@@ -324,7 +325,7 @@ export default function App() {
             </div>
             <span className="text-xl font-bold tracking-tighter text-slate-800">Good Care Checklist</span>
           </div>
-          <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.4em] pt-8">© 2026 Good Care Checklist</p>
+          <p className="text-xs text-slate-300 font-bold uppercase tracking-[0.4em] pt-8">© 2026 Good Care Checklist</p>
         </div>
       </footer>
     </div>
@@ -336,47 +337,52 @@ interface ProtocolCardProps {
   protocol: Protocol;
   index: number;
   isHighlighted?: boolean;
+  isDimmed?: boolean;
   onClick: () => void;
 }
 
-function ProtocolCard({ protocol, index, isHighlighted, onClick }: ProtocolCardProps) {
+function ProtocolCard({ protocol, index, isHighlighted, isDimmed, onClick }: ProtocolCardProps) {
   const Icon = protocol.icon;
-  
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: 1, 
+      animate={{
+        opacity: isDimmed ? 0.4 : 1,
         y: 0,
-        scale: isHighlighted ? 1.02 : 1,
+        scale: isHighlighted ? 1.04 : 1,
       }}
       transition={{ delay: index * 0.05 }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -8, scale: isHighlighted ? 1.05 : 1.02, opacity: 1 }}
       onClick={onClick}
       className={cn(
         "group cursor-pointer transition-all duration-500",
-        isHighlighted ? "ring-4 ring-indigo-500/20 rounded-[2.5rem]" : ""
+        isHighlighted ? "ring-4 ring-indigo-500 ring-offset-4 ring-offset-[#fffdfa] rounded-[3rem] shadow-2xl shadow-indigo-200" : "",
+        isDimmed ? "grayscale" : ""
       )}
     >
       <Card className="h-full border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden bg-white rounded-[3rem] cute-shadow cute-shadow-hover">
         <div className={cn("h-4 w-full", protocol.color)} />
-        <CardHeader className="p-10 pb-4">
+        <CardHeader className="p-10 pb-4 relative">
+          <div className="absolute top-8 right-10 text-5xl font-bold font-cute text-slate-100 group-hover:text-indigo-100 transition-colors leading-none select-none" aria-hidden="true">
+            0{index + 1}
+          </div>
           <div className={cn(
-            "w-20 h-20 rounded-[2rem] flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-xl shadow-indigo-100/30", 
-            protocol.color, 
+            "w-20 h-20 rounded-[2rem] flex items-center justify-center mb-8 transition-transform duration-300 group-hover:scale-105 shadow-xl shadow-indigo-100/30",
+            protocol.color,
             protocol.textColor
           )}>
             <Icon size={40} />
           </div>
           <CardTitle className="text-3xl font-bold tracking-tight text-slate-800 group-hover:text-indigo-600 transition-colors font-cute">{protocol.title}</CardTitle>
-          <CardDescription className="text-slate-500 text-lg leading-relaxed font-medium mt-4 line-clamp-3">{protocol.shortDesc}</CardDescription>
+          <CardDescription className="text-slate-600 text-lg leading-relaxed font-medium mt-4 line-clamp-3">{protocol.shortDesc}</CardDescription>
         </CardHeader>
         <CardContent className="p-10 pt-0 flex items-center justify-between mt-6">
           <div className="flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-indigo-500 animate-bounce" />
+            <div className="w-2 h-2 rounded-full bg-indigo-500" />
             <span className="text-xs font-bold text-slate-400 group-hover:text-indigo-500 transition-colors uppercase tracking-[0.2em]">Explore Guide</span>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-indigo-600 group-hover:text-white group-hover:translate-x-2 transition-all duration-500 shadow-sm">
+          <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-indigo-600 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 shadow-sm">
             <ChevronRight size={24} />
           </div>
         </CardContent>
@@ -430,7 +436,7 @@ function JourneyView({ onSelect }: { onSelect: (p: Protocol) => void }) {
                     </div>
                     <h3 className="text-2xl font-bold text-slate-800 font-cute group-hover:text-indigo-600 transition-colors">{protocol.title}</h3>
                   </div>
-                  <p className="text-slate-500 font-medium leading-relaxed">{protocol.shortDesc}</p>
+                  <p className="text-slate-600 font-medium leading-relaxed">{protocol.shortDesc}</p>
                   <div className={cn(
                     "mt-4 flex items-center gap-2",
                     isEven ? "md:justify-end" : "md:justify-start"
@@ -501,96 +507,136 @@ function ProtocolDetail({ protocol, onBack, onNext }: { protocol: Protocol, onBa
         <div className="w-20" />
       </div>
 
-      <div className="flex flex-col md:flex-row gap-10 items-start">
-        <motion.div 
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring", bounce: 0.5 }}
-          className={cn("w-24 h-24 rounded-[2rem] flex items-center justify-center shadow-lg shrink-0", protocol.color, protocol.textColor)}
-        >
-          <Icon size={40} strokeWidth={2.5} />
-        </motion.div>
-        
-        <div className="space-y-6 flex-1">
-          <div className="space-y-2">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight font-cute">{protocol.title}</h2>
-            <p className="text-2xl text-slate-500 font-cute font-medium">{protocol.shortDesc}</p>
+      <div className="space-y-12">
+        {/* Editorial header */}
+        <div className="grid md:grid-cols-[auto,1fr] gap-8 md:gap-10 items-start">
+          <motion.div
+            initial={{ scale: 0.85, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", bounce: 0.3 }}
+            className={cn("w-28 h-28 md:w-32 md:h-32 rounded-[2rem] flex items-center justify-center shadow-xl shrink-0", protocol.color, protocol.textColor)}
+          >
+            <Icon size={48} strokeWidth={2.25} />
+          </motion.div>
+
+          <div className="space-y-4 flex-1 min-w-0 pt-1">
+            <h2 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tight font-cute leading-[1.05]">{protocol.title}</h2>
+            <p className="text-xl md:text-2xl text-slate-600 font-medium leading-relaxed max-w-2xl">{protocol.shortDesc}</p>
           </div>
-          
-          <div className="p-8 bg-indigo-50 border-2 border-indigo-100/50 rounded-3xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/40 rounded-full translate-x-1/2 -translate-y-1/2 blur-2xl group-hover:scale-150 transition-transform duration-700" />
-            <div className="flex items-center gap-2 text-indigo-600 mb-3 relative z-10">
-              <Zap size={18} />
-              <h5 className="text-[10px] font-bold uppercase tracking-widest">Why It Matters For You</h5>
+        </div>
+
+        {/* Why It Matters — pull quote */}
+        <div className="relative pl-10 md:pl-14 py-2 max-w-4xl">
+          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-indigo-400 via-indigo-300 to-indigo-100 rounded-full" />
+          <div className="absolute left-3 -top-4 text-7xl md:text-8xl text-indigo-200 font-cute leading-none select-none pointer-events-none" aria-hidden="true">&ldquo;</div>
+          <div className="space-y-4 relative">
+            <div className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600 flex items-center gap-2">
+              <Zap size={16} className="fill-indigo-500" /> Why It Matters For You
             </div>
-            <p className="text-lg font-medium text-slate-800 leading-relaxed relative z-10">
+            <p className="text-2xl md:text-3xl font-medium text-slate-800 leading-relaxed">
               {protocol.whyItMatters}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 pt-8 border-t border-slate-100">
+      <div className="space-y-10 pt-8 border-t border-slate-100">
         {protocol.sections.map((section, idx) => (
           <motion.div
             key={idx}
             variants={itemVariants}
-            className="flex flex-col bg-white rounded-[2.5rem] border-2 border-slate-100 hover:border-indigo-200 shadow-xl shadow-slate-200/50 hover:shadow-indigo-500/10 transition-all duration-300 overflow-hidden group/card relative opacity-75 hover:opacity-100"
+            className="relative bg-white rounded-[2.5rem] border-2 border-slate-100 hover:border-indigo-200 shadow-xl shadow-slate-200/40 hover:shadow-indigo-500/10 transition-shadow duration-300 overflow-hidden group/card"
           >
-            <div className="h-1.5 w-full bg-slate-100 group-hover/card:bg-indigo-100 transition-colors">
-              <div className="h-full bg-indigo-500 transition-all duration-700 w-1/3 group-hover/card:w-2/3" />
-            </div>
+            {/* Chapter accent bar */}
+            <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-indigo-400 via-indigo-300 to-indigo-100" aria-hidden="true" />
 
-            <div className="p-8 md:p-10 flex-1 flex flex-col gap-8">
-              <div className="space-y-4">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 font-bold text-sm transition-colors group-hover/card:bg-indigo-500 group-hover/card:text-white">
+            <div className="grid md:grid-cols-[7rem,1fr] gap-6 md:gap-10 p-8 md:p-12 pl-10 md:pl-14">
+              {/* Chapter numeral stamp */}
+              <div className="flex md:flex-col items-center md:items-start gap-3 md:gap-1 shrink-0">
+                <div className="text-xs font-bold text-indigo-500 uppercase tracking-[0.3em]">Chapter</div>
+                <div className="text-7xl md:text-8xl font-bold font-cute text-indigo-200 leading-[0.85] group-hover/card:text-indigo-300 transition-colors select-none" aria-hidden="true">
                   {idx + 1}
                 </div>
-                <h3 className="text-2xl font-bold text-slate-800 font-cute transition-colors group-hover/card:text-indigo-900">{section.title}</h3>
-                <p className="text-slate-600 leading-relaxed text-lg">{section.description}</p>
-              </div>
-              
-              <div className="space-y-4">
-                <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Your Next Steps</h5>
-                <ul className="space-y-3">
-                  {section.checkpoints.map((cp, cpIdx) => (
-                     <li key={cpIdx} className="flex items-start gap-3">
-                       <CheckCircle2 size={18} className="text-indigo-500 shrink-0 mt-0.5" />
-                       <span className="text-sm text-slate-600 leading-relaxed font-medium">{cp}</span>
-                     </li>
-                  ))}
-                </ul>
               </div>
 
-              <div className="mt-auto flex flex-col gap-6 pt-4">
-                <div className="p-6 bg-rose-50 border border-rose-100 rounded-2xl flex items-start gap-4 shadow-inner transition-colors group-hover/card:bg-rose-100/50">
-                  <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-rose-500 shadow-sm shrink-0 mt-1">
-                    <Heart size={14} fill="currentColor" />
-                  </div>
-                  <div className="space-y-1">
-                     <h5 className="text-[10px] uppercase tracking-widest font-bold text-rose-500">Community Insight</h5>
-                     <p className="text-sm font-medium text-slate-700 italic leading-relaxed">"{section.patientTip}"</p>
-                  </div>
+              {/* Section content */}
+              <div className="space-y-8 min-w-0">
+                <div className="space-y-3">
+                  <h3 className="text-3xl md:text-4xl font-bold text-slate-800 font-cute leading-tight group-hover/card:text-indigo-900 transition-colors">{section.title}</h3>
+                  <p className="text-slate-600 leading-relaxed text-lg max-w-2xl">{section.description}</p>
                 </div>
 
-                {(section as any).integratedLink && (
-                  <div className="pt-6 border-t border-slate-100">
-                    <a
-                      href={(section as any).integratedLink.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between w-full p-4 rounded-xl bg-slate-50 hover:bg-white border border-slate-200 hover:border-indigo-300 shadow-sm transition-all group/btn"
-                    >
-                       <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-indigo-600 shadow-sm group-hover/btn:bg-indigo-50 transition-colors">
-                            <Globe size={14} />
-                         </div>
-                         <span className="text-sm font-bold text-slate-700 group-hover/btn:text-indigo-700">{(section as any).integratedLink.title}</span>
-                       </div>
-                       <ArrowRight size={16} className="text-slate-400 group-hover/btn:text-indigo-600 group-hover/btn:translate-x-1 transition-all" />
-                    </a>
+                <div className="grid md:grid-cols-2 gap-8 pt-2">
+                  {/* Left: Next Steps */}
+                  <div className="space-y-4">
+                    <h5 className="text-xs font-bold text-indigo-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                      <CheckCircle2 size={13} /> Your Next Steps
+                    </h5>
+                    <ul className="space-y-3">
+                      {section.checkpoints.map((cp, cpIdx) => (
+                        <li key={cpIdx} className="flex items-start gap-3 group/cp">
+                          <div className="w-7 h-7 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500 shrink-0 mt-0.5 group-hover/cp:bg-indigo-100 transition-colors">
+                            <CheckCircle2 size={15} strokeWidth={2.5} />
+                          </div>
+                          <span className="text-slate-700 leading-relaxed font-medium pt-0.5">{cp}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                )}
+
+                  {/* Right: Insight + Resource stack */}
+                  <div className="space-y-4">
+                    <div className="p-6 bg-rose-50 border border-rose-100 rounded-2xl flex items-start gap-4">
+                      <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-rose-500 shadow-sm shrink-0 mt-0.5">
+                        <Heart size={15} fill="currentColor" />
+                      </div>
+                      <div className="space-y-1.5 min-w-0">
+                        <h5 className="text-xs uppercase tracking-[0.2em] font-bold text-rose-500">Community Insight</h5>
+                        <p className="text-base font-medium text-slate-700 leading-relaxed">&ldquo;{section.patientTip}&rdquo;</p>
+                      </div>
+                    </div>
+
+                    {section.integratedLinks && section.integratedLinks.length > 0 && (
+                      <div className="rounded-2xl border-2 border-indigo-100 bg-gradient-to-br from-indigo-50/70 via-white to-white overflow-hidden shadow-sm hover:shadow-md hover:border-indigo-200 transition-all">
+                        <a
+                          href={section.integratedLinks[0].url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-start gap-4 p-5 hover:bg-white/60 focus:bg-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 transition-colors group/btn cursor-pointer"
+                        >
+                          <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-indigo-600 shadow-sm shrink-0 ring-1 ring-indigo-100 group-hover/btn:ring-indigo-200 group-hover/btn:scale-105 transition-all">
+                            <BookOpen size={20} strokeWidth={2.25} />
+                          </div>
+                          <div className="flex-1 min-w-0 space-y-1.5 pt-0.5">
+                            <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-600 uppercase tracking-[0.2em]">
+                              <Sparkles size={10} className="fill-indigo-500 text-indigo-500" />
+                              Recommended Resource
+                            </div>
+                            <div className="font-bold text-slate-800 leading-snug group-hover/btn:text-indigo-700 transition-colors">
+                              {section.integratedLinks[0].title}
+                            </div>
+                          </div>
+                          <ArrowRight size={18} className="text-indigo-400 group-hover/btn:text-indigo-600 group-hover/btn:translate-x-0.5 transition-all mt-3 shrink-0" />
+                        </a>
+
+                        {section.integratedLinks.slice(1).map((link, linkIdx) => (
+                          <a
+                            key={linkIdx}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 px-5 py-3.5 border-t border-indigo-100/70 bg-white/40 hover:bg-white focus:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 transition-colors group/sup cursor-pointer"
+                          >
+                            <span className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500 shrink-0">Also Helpful</span>
+                            <span className="text-slate-300 shrink-0" aria-hidden="true">·</span>
+                            <span className="text-base font-semibold text-slate-700 group-hover/sup:text-indigo-700 transition-colors truncate">{link.title}</span>
+                            <ExternalLink size={13} className="text-slate-400 group-hover/sup:text-indigo-500 group-hover/sup:translate-x-0.5 transition-all ml-auto shrink-0" />
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -665,11 +711,11 @@ function MilestoneDetail({ protocol, onBack, onNext }: { protocol: Protocol, onB
 
       <div className="grid md:grid-cols-2 gap-6">
          <motion.div variants={itemVariants} className="bg-indigo-50 rounded-3xl p-8 border border-indigo-100">
-            <h4 className="text-indigo-800 font-bold uppercase tracking-widest text-[10px] mb-4 flex items-center gap-2"><Sparkles size={14}/> Core Summary</h4>
+            <h4 className="text-indigo-800 font-bold uppercase tracking-widest text-xs mb-4 flex items-center gap-2"><Sparkles size={14}/> Core Summary</h4>
             <p className="text-slate-700 font-medium text-lg leading-relaxed">{milestone.summary}</p>
          </motion.div>
          <motion.div variants={itemVariants} className="bg-amber-50 rounded-3xl p-8 border border-amber-100">
-            <h4 className="text-amber-800 font-bold uppercase tracking-widest text-[10px] mb-4 flex items-center gap-2"><Activity size={14}/> What To Expect</h4>
+            <h4 className="text-amber-800 font-bold uppercase tracking-widest text-xs mb-4 flex items-center gap-2"><Activity size={14}/> What To Expect</h4>
             <p className="text-slate-700 font-medium text-lg leading-relaxed">{milestone.expectation}</p>
          </motion.div>
       </div>
@@ -742,14 +788,14 @@ function MilestoneDetail({ protocol, onBack, onNext }: { protocol: Protocol, onB
                   className="group flex flex-col gap-3 p-6 rounded-2xl bg-slate-50 hover:bg-white border border-slate-200 hover:border-indigo-300 shadow-sm transition-all"
                  >
                    <div className="flex items-center justify-between">
-                      <span className="px-3 py-1 bg-white rounded-full text-[10px] font-bold uppercase tracking-widest text-indigo-600 shadow-sm border border-slate-100">
+                      <span className="px-3 py-1 bg-white rounded-full text-xs font-bold uppercase tracking-widest text-indigo-600 shadow-sm border border-slate-100">
                         {aid.type}
                       </span>
                       <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-600 transition-colors group-hover:translate-x-1" />
                    </div>
                    <div>
                      <h5 className="font-bold text-slate-800 mb-2">{aid.title}</h5>
-                     <p className="text-sm text-slate-600 leading-relaxed font-medium">{aid.description}</p>
+                     <p className="text-base text-slate-600 leading-relaxed font-medium">{aid.description}</p>
                    </div>
                 </a>
               ))}
