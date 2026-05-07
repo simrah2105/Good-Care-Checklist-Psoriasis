@@ -62,7 +62,7 @@ export default function App() {
 
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/60 backdrop-blur-xl">
-        <div className="container mx-auto px-4 md:px-10 lg:px-16 xl:px-24 h-24 flex items-center justify-between">
+        <div className="container mx-auto px-6 md:px-8 lg:px-10 xl:px-12 h-24 flex items-center justify-between">
           <div className="flex items-center gap-4 group cursor-pointer" onClick={() => setSelectedProtocol(null)}>
             <div className="w-20 h-20 rounded-2xl bg-white border border-slate-100 flex items-center justify-center p-1.5 shadow-sm group-hover:rotate-3 transition-transform overflow-hidden">
               <img
@@ -104,7 +104,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 md:px-10 lg:px-16 xl:px-24 py-8 md:py-16">
+      <main className="container mx-auto px-6 md:px-8 lg:px-10 xl:px-12 py-8 md:py-16">
         <AnimatePresence mode="wait">
           {!selectedProtocol ? (
             <motion.div
@@ -314,7 +314,7 @@ export default function App() {
 
       <footer className="py-16 border-t bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-slate-100 to-transparent" />
-        <div className="container mx-auto px-4 md:px-10 lg:px-16 xl:px-24 text-center space-y-8 relative z-10">
+        <div className="container mx-auto px-6 md:px-8 lg:px-10 xl:px-12 text-center space-y-8 relative z-10">
           <div className="flex justify-center items-center gap-4">
             <div className="w-16 h-10 rounded-lg bg-white border border-slate-100 flex items-center justify-center p-1 shadow-sm overflow-hidden">
               <img 
