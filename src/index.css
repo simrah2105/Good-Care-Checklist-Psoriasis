@@ -120,6 +120,16 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
   }
+
+  /* Poppins is slightly wider per character than Inter/Outfit, so titles
+     wrap to extra lines and stretch card heights. Tighten letter-spacing
+     a touch on headings/display text in brand mode only — keeps font-size
+     identical so card dimensions match classic. */
+  html:not([data-theme="classic"]) :is(h1, h2, h3, h4, h5, h6),
+  html:not([data-theme="classic"]) .font-cute,
+  html:not([data-theme="classic"]) .font-display {
+    letter-spacing: -0.022em;
+  }
 }
 
 @layer utilities {
