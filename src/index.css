@@ -120,6 +120,13 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
   }
+
+  /* Poppins glyphs render visually larger than Inter at the same nominal
+     size — scale the root down a touch when brand theme is active so
+     overall text sizing matches what classic looks like. */
+  html:not([data-theme="classic"]) {
+    font-size: 15.2px;
+  }
 }
 
 @layer utilities {

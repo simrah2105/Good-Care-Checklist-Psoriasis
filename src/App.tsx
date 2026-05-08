@@ -423,7 +423,7 @@ function ProtocolCard({ protocol, index, isHighlighted, isDimmed, onClick }: Pro
           <CardTitle className="text-3xl font-bold tracking-tight text-slate-800 group-hover:text-indigo-600 transition-colors font-cute">{protocol.title}</CardTitle>
           <CardDescription className="text-slate-600 text-lg leading-relaxed font-medium mt-4 line-clamp-3">{protocol.shortDesc}</CardDescription>
         </CardHeader>
-        <CardContent className="p-10 pt-0 flex items-center justify-between mt-6 flex-1">
+        <CardContent className="p-10 pt-0 flex items-center justify-between mt-auto">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-indigo-500" />
             <span className="text-xs font-bold text-slate-400 group-hover:text-indigo-500 transition-colors uppercase tracking-[0.2em]">Explore Guide</span>
