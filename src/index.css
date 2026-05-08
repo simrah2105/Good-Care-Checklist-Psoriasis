@@ -1,18 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Outfit:wght@400..700&family=Fredoka:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400..700&family=Outfit:wght@400..700&family=Fredoka:wght@400..700&display=swap');
 @import "tailwindcss";
 
 @theme {
+  /* Brand font: Poppins (used everywhere) */
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", sans-serif;
+  --font-cute: "Poppins", sans-serif;
+
+  /* Brand-aligned weights (Poppins ships discrete weights 400/500/600/700) */
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 700;
+
+  /* === Good Care brand palette ===
+     #FFFFFF white · #FCF0C2 cream · #E8B8E5 lavender ·
+     #9F3E94 magenta · #582D80 deep purple */
+  --color-brand-cream: #FCF0C2;
+  --color-brand-lavender: #E8B8E5;
+  --color-brand-magenta: #9F3E94;
+  --color-brand-deep: #582D80;
+
+  /* Domain backgrounds (6 derived from 5 brand colors) */
+  --color-diagnosis: #FCF0C2;       /* brand cream */
+  --color-holistic: #E8B8E5;        /* brand lavender */
+  --color-treatment: #F5C29D;       /* warm peach (bridges cream/lavender) */
+  --color-decision: #DDD0EC;        /* pale periwinkle */
+  --color-management: #F8E2EC;      /* soft pink-lavender */
+  --color-psychosocial: #D5B4D2;    /* mid lavender */
+
+  /* All domain text uses brand deep purple for cohesion + contrast */
+  --color-diagnosis-foreground: #582D80;
+  --color-holistic-foreground: #582D80;
+  --color-treatment-foreground: #582D80;
+  --color-decision-foreground: #582D80;
+  --color-management-foreground: #9F3E94;
+  --color-psychosocial-foreground: #582D80;
+
+  /* Override indigo scale with brand magenta/deep-purple ramp,
+     so every existing bg-indigo-X / text-indigo-X / ring-indigo-X
+     class auto-picks up the brand without code changes. */
+  --color-indigo-50: #F7ECF5;
+  --color-indigo-100: #EFD8EC;
+  --color-indigo-200: #DEB3D9;
+  --color-indigo-300: #C58CBE;
+  --color-indigo-400: #B0699F;
+  --color-indigo-500: #9F3E94;
+  --color-indigo-600: #863780;
+  --color-indigo-700: #6E306A;
+  --color-indigo-800: #582D80;
+  --color-indigo-900: #44215F;
+
+  /* Override amber scale with cream-yellow ramp from brand cream,
+     so the equity section's amber styling matches the brand. */
+  --color-amber-50: #FFFBEA;
+  --color-amber-100: #FCF0C2;
+  --color-amber-200: #F8E29A;
+  --color-amber-300: #F2CF6E;
+  --color-amber-400: #E8B946;
+  --color-amber-500: #D6A02C;
+  --color-amber-600: #B58220;
+  --color-amber-700: #8F651B;
+
+  /* Page background — variabilized so themes can swap it */
+  --color-page-bg: #FEFCF5;
+}
+
+/* === CLASSIC THEME (pre-brand) ===
+   Toggled via <html data-theme="classic">.
+   Removable in one block once a theme is chosen. */
+[data-theme="classic"] {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", sans-serif;
   --font-cute: "Fredoka", sans-serif;
 
-  /* Lightened weights (~10% thinner across the board) */
   --font-weight-medium: 420;
   --font-weight-semibold: 525;
   --font-weight-bold: 630;
   --font-weight-black: 735;
 
-  /* More vibrant, "pop" pastels */
+  --color-page-bg: #fffdfa;
+
   --color-diagnosis: #bae6fd;
   --color-holistic: #bbf7d0;
   --color-treatment: #fed7aa;
@@ -26,6 +94,26 @@
   --color-decision-foreground: #7e22ce;
   --color-management-foreground: #be185d;
   --color-psychosocial-foreground: #be123c;
+
+  --color-indigo-50: #eef2ff;
+  --color-indigo-100: #e0e7ff;
+  --color-indigo-200: #c7d2fe;
+  --color-indigo-300: #a5b4fc;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-700: #4338ca;
+  --color-indigo-800: #3730a3;
+  --color-indigo-900: #312e81;
+
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
 }
 
 @layer base {

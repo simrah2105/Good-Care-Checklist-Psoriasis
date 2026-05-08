@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ChevronRight,
@@ -36,6 +36,18 @@ export default function App() {
   const [detailMode, setDetailMode] = useState<'protocol' | 'milestone'>('protocol');
   const [viewMode, setViewMode] = useState<'grid' | 'journey'>('grid');
   const [persona, setPersona] = useState<string | null>(null);
+  // === Theme toggle (REMOVABLE) ===
+  // To delete the toggle later: remove this useState, the useEffect below,
+  // the button JSX in the header, and the [data-theme="classic"] block in
+  // index.css.
+  const [theme, setTheme] = useState<'brand' | 'classic'>(() => {
+    if (typeof window === 'undefined') return 'brand';
+    return (localStorage.getItem('gcc-theme') as 'brand' | 'classic') || 'brand';
+  });
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme === 'classic' ? 'classic' : '';
+    localStorage.setItem('gcc-theme', theme);
+  }, [theme]);
 
   const handleNextProtocol = () => {
     if (!selectedProtocol) return;
@@ -52,7 +64,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#fffdfa] text-slate-900 font-sans selection:bg-indigo-100 relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--color-page-bg)] text-slate-900 font-sans selection:bg-indigo-100 relative overflow-hidden">
       {/* Decorative Background Blobs */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-100/40 rounded-full blur-[120px] animate-float" />
@@ -78,6 +90,19 @@ export default function App() {
           </div>
           
           <div className="flex items-center gap-4">
+            {/* Theme toggle (REMOVABLE) */}
+            <motion.button
+              onClick={() => setTheme((t) => (t === 'brand' ? 'classic' : 'brand'))}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.15em] border-2 border-slate-200 bg-white/70 hover:bg-white text-slate-600 hover:text-indigo-600 transition-colors"
+              aria-label="Toggle theme"
+              title={theme === 'brand' ? 'Switch to classic palette' : 'Switch to brand palette'}
+            >
+              <span className={cn('w-2 h-2 rounded-full', theme === 'brand' ? 'bg-indigo-500' : 'bg-slate-400')} />
+              {theme === 'brand' ? 'Brand' : 'Classic'}
+            </motion.button>
+
             {!selectedProtocol && (
               <div className="hidden md:flex bg-slate-100/50 p-1 rounded-2xl border border-slate-200/30 backdrop-blur-sm">
                 <button 
@@ -121,7 +146,7 @@ export default function App() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 15 }}
                 >
-                  <h2 className="text-5xl md:text-7xl font-[580] tracking-tight text-slate-900 leading-[0.95] font-cute">
+                  <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 leading-[0.95] font-cute">
                     Your Path to <br />
                     <span className="relative inline-block mt-2">
                       <span className="relative z-10 text-indigo-600">Better Care</span>
@@ -374,7 +399,7 @@ function ProtocolCard({ protocol, index, isHighlighted, isDimmed, onClick }: Pro
       onClick={onClick}
       className={cn(
         "group cursor-pointer transition-all duration-500",
-        isHighlighted ? "ring-4 ring-indigo-500 ring-offset-4 ring-offset-[#fffdfa] rounded-[3rem] shadow-2xl shadow-indigo-200" : "",
+        isHighlighted ? "ring-4 ring-indigo-500 ring-offset-4 ring-offset-[var(--color-page-bg)] rounded-[3rem] shadow-2xl shadow-indigo-200" : "",
         isDimmed ? "grayscale" : ""
       )}
     >
