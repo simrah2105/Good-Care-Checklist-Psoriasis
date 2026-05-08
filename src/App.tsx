@@ -159,7 +159,7 @@ export default function App() {
                     </span>
                   </h2>
                 </motion.div>
-                <p className="text-2xl text-slate-500 leading-relaxed max-w-2xl mx-auto font-medium font-cute">
+                <p className="text-2xl text-slate-500 leading-relaxed max-w-3xl mx-auto font-medium font-cute">
                   A streamlined guide built to help you navigate the complexities of psoriatic arthritis with confidence and clarity.
                 </p>
 
