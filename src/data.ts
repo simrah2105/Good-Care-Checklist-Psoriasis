@@ -210,8 +210,8 @@ export const protocols: Protocol[] = [
       { id: 'R-004', title: 'Learn About the PASI Score', url: 'https://psoriasiscanada.ca/about-psoriasis/pasi-score/' }
     ],
     equityResources: [
-      { title: 'Plain Language Symptom Guide', url: '#', description: 'Jargon-free overview of early PsA symptoms, written at a grade 6 reading level.' },
-      { title: 'Find a Specialist Near You', url: '#', description: 'Locate rheumatologists and dermatologists, including those offering interpreter services.' }
+      { title: 'Lived Experience Infographic', url: 'https://arthritispatient.ca/wp-content/uploads/2025/12/Lived-Experience-Nov-2025-Infographic-Final-1.pdf', description: 'Plain-language infographic capturing what daily life with arthritis actually looks like, told through real patient voices.' },
+      { title: 'Arthritis Patient Charter', url: 'https://arthritispatient.ca/en/arthritis-patient-charter', description: 'Know your rights as a patient — a charter outlining the care, respect, and access every Canadian arthritis patient is entitled to.' }
     ]
   },
   {
@@ -285,8 +285,8 @@ export const protocols: Protocol[] = [
       { id: 'R-126', title: 'Pregnancy and Parenting with Arthritis', url: 'https://arthritispatient.ca/en/pregnancy-and-parenting-with-arthritis-a-resource-for-patients-by-patients/' }
     ],
     equityResources: [
-      { title: 'Care Across Life Stages', url: '#', description: 'Resources tailored for children, parents, and older adults navigating psoriatic disease.' },
-      { title: 'Cultural Sensitivity in Care', url: '#', description: 'Guidance on how psoriatic disease may present and be managed across different communities.' }
+      { title: 'Reproductive & Sexual Health Survey Report', url: 'https://arthritispatient.ca/wp-content/uploads/2021/09/Report_Final_English-1.pdf', description: 'Final report from a survey on reproductive and sexual health in women+ with inflammatory arthritis, rheumatic, and psoriatic diseases.' },
+      { title: 'Pregnancy & Parenting with Arthritis', url: 'https://arthritispatient.ca/en/pregnancy-and-parenting-with-arthritis-a-resource-for-patients-by-patients/', description: 'A patient-built guide for navigating pregnancy, postpartum, and parenting while managing arthritis — written by people who\'ve lived it.' }
     ]
   },
   {
@@ -360,8 +360,8 @@ export const protocols: Protocol[] = [
       { id: 'R-052', title: 'PsA Oral Therapies', url: 'https://psoriasiscanada.ca/treatments-treating-pso-and-psa-overview/biologics-and-biosimilars/' }
     ],
     equityResources: [
-      { title: 'Public Drug Plans by Province', url: 'https://arthritispatient.ca/en/public-drug-plan-information-by-province/', description: 'Coverage rules and access pathways for medications in each Canadian province.' },
-      { title: 'Patient Assistance Programs', url: '#', description: 'Manufacturer-sponsored programs that reduce out-of-pocket biologic costs.' }
+      { title: 'Public Drug Plans by Province', url: 'https://arthritispatient.ca/en/public-drug-plan-information-by-province/', description: 'Province-by-province information on public drug plan coverage for arthritis medications.' },
+      { title: 'Medication Access: Public Insurance', url: 'https://psoriasiscanada.ca/medication-access-overview/public-insurance/', description: 'Psoriasis Canada\'s guide to navigating public drug insurance for psoriasis and PsA medications.' }
     ]
   },
   {
@@ -423,20 +423,18 @@ export const protocols: Protocol[] = [
           'Keep copies of all your forms in case you need to appeal a coverage denial'
         ],
         integratedLinks: [
-          { title: 'Medication Access Guide', url: 'https://psoriasiscanada.ca/medication-access-overview/' },
-          { title: 'Public Drug Plans by Province', url: 'https://arthritispatient.ca/en/public-drug-plan-information-by-province/' }
+          { title: 'Medication Access Guide', url: 'https://psoriasiscanada.ca/medication-access-overview/' }
         ]
       }
     ],
     resources: [
       { id: 'R-110', title: 'Making the Most Out of Your Appointment', url: 'https://arthritispatient.ca/en/how-to-make-the-most-out-of-your-appointment/' },
       { id: 'R-096', title: 'Setting Treatment Goals', url: 'https://psoriasiscanada.ca/treatment-decisions-overview/setting-your-goals/' },
-      { id: 'R-055', title: 'Medication Access Guide', url: 'https://psoriasiscanada.ca/medication-access-overview/' },
-      { id: 'R-163', title: 'Public Drug Plans by Province', url: 'https://arthritispatient.ca/en/public-drug-plan-information-by-province/' }
+      { id: 'R-055', title: 'Medication Access Guide', url: 'https://psoriasiscanada.ca/medication-access-overview/' }
     ],
     equityResources: [
-      { title: 'Patient Advocacy Toolkit', url: '#', description: 'Templates and scripts for advocating with providers, insurers, and HR teams.' },
-      { title: 'Insurance Appeals Guide', url: '#', description: 'Step-by-step walkthrough for appealing denied coverage, including sample letters.' }
+      { title: 'Treatment Decisions Overview', url: 'https://psoriasiscanada.ca/treatment-decisions-overview/', description: 'Psoriasis Canada\'s hub on making informed treatment decisions for psoriasis and PsA.' },
+      { title: 'Communicating with Your Healthcare Team', url: 'https://arthritispatient.ca/wp-content/uploads/2020/11/Communicating-with-Your-Healthcare-Team.2020.pdf', description: 'CAPA guide on how to communicate effectively with your healthcare team.' }
     ]
   },
   {
@@ -469,7 +467,7 @@ export const protocols: Protocol[] = [
           "Inability to perform daily activities due to pain or stiffness"
         ]
       },
-      journeyAids: [{ title: 'Flare Action Plan Template', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/', description: 'Template to fill out with your doctor on what to do during a flare.', type: 'worksheet' }, { title: 'Working with PsA', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/', description: 'How to ask for ergonomic tools and flexible schedules.', type: 'worksheet' }]
+      journeyAids: [{ title: 'Flare Action Plan Template', url: 'https://arthritispatient.ca/en/giving-patients-control-new-resource-know-your-numbers-trends/', description: 'Template to fill out with your doctor on what to do during a flare.', type: 'worksheet' }]
     },
     whyItMatters: 'Recognizing your own individual triggers helps you stay ahead of flares rather than constantly fighting them after they hit.',
     relatedDomainIds: ['Peripheral Arthritis', 'Nail Disease'],
@@ -510,8 +508,8 @@ export const protocols: Protocol[] = [
       { id: 'R-139', title: 'The Role of an Occupational Therapist', url: 'https://arthritispatient.ca/en/the-role-of-an-occupational-therapist-ot-to-support-people-living-with-arthritis/' }
     ],
     equityResources: [
-      { title: 'Workplace Accommodations Guide', url: '#', description: 'Knowing your rights and asking for ergonomic, scheduling, and remote-work supports.' },
-      { title: 'Disability Tax Credit Info', url: '#', description: 'Eligibility, application help, and what to do if your initial claim is rejected.' }
+      { title: 'Working with Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/', description: 'Psoriasis Canada\'s guide to managing PsA in the workplace and navigating accommodations.' },
+      { title: 'Assistive Devices for Home', url: 'https://arthritispatient.ca/en/assistive-devices-for-home/', description: 'CAPA overview of assistive devices that make daily tasks at home more manageable.' }
     ]
   },
   {
@@ -573,7 +571,6 @@ export const protocols: Protocol[] = [
           'Make dedicated time for hobbies and passions that remind you of who you are beyond the disease'
         ],
         integratedLinks: [
-          { title: 'Working with Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/' },
           { title: 'Youth and Young Adults with Rheumatic Disease', url: 'https://arthritispatient.ca/en/youth-and-young-adults-with-rheumatic-disease/' }
         ]
       }
@@ -581,12 +578,11 @@ export const protocols: Protocol[] = [
     resources: [
       { id: 'R-016', title: 'Psoriasis and Your Emotions', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/' },
       { id: 'R-024', title: 'Psoriasis and Relationships', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/psoriasis-and-relationships/' },
-      { id: 'R-041', title: 'Working with Psoriatic Arthritis', url: 'https://psoriasiscanada.ca/psoriatic-arthritis-what-is-psa-overview/living-with-psa-overview/working-with-psa/' },
       { id: 'R-123', title: 'Youth and Young Adults with Rheumatic Disease', url: 'https://arthritispatient.ca/en/youth-and-young-adults-with-rheumatic-disease/' }
     ],
     equityResources: [
-      { title: 'Free & Sliding-Scale Mental Health Support', url: '#', description: 'Counselling and therapy options that don\'t require private insurance.' },
-      { title: 'Peer Communities for Chronic Illness', url: '#', description: 'Online and in-person groups, including identity-specific spaces (BIPOC, LGBTQ+, youth).' }
+      { title: 'Pso Intimate', url: 'https://psoriasiscanada.ca/resources/pso-intimate/', description: 'Psoriasis Canada\'s resource on intimacy, relationships, and sexual health while living with psoriatic disease.' },
+      { title: 'Psoriasis and Fatigue', url: 'https://psoriasiscanada.ca/living-with-psoriatic-disease/psoriasis-and-fatigue', description: 'Psoriasis Canada\'s guide to recognizing and managing fatigue as part of life with psoriatic disease.' }
     ]
   }
 ];
