@@ -40,4 +40,4 @@ All guide content is in `src/data.ts`. This file defines the clinical domains, p
 
 ## License
 
-Licensed under the [MIT License](LICENSE) — © 2026 Canadian Arthritis Patient Alliance (CAPA). You are free to use, modify, and distribute this work, provided the copyright notice and license are retained.
+Licensed under the [MIT License](LICENSE). © 2026 Canadian Arthritis Patient Alliance (CAPA) and Psoriasis Canada. You are free to use, modify, and distribute this work, provided the copyright notice and license are retained.
